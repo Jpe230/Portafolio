@@ -1,3 +1,9 @@
+var sliders = new TimelineMax({paused: true});
+
+var oneS = $("#oneS");
+
+
+
 var duration  = 2,
     easing    = Power4.easeOut,
     projectCards = new TimelineMax({paused: true});
@@ -10,9 +16,7 @@ var Card4 = $('.Card4');
 var Card5 = $('.Card5');
 
 
-
 var Cards = [];
-
 
 Cards.push(Card1);
 Cards.push(Card2);
@@ -99,6 +103,23 @@ projectCards
 .to(Card2, duration, { x: '-80%', ease: easing }, .4)
 .to(Card4, duration, { x: '80%', ease: easing }, .4)
 .to(Card5, duration, { x: '160%', ease: easing }, .4);
+
+
+
+var objValue = {a:0};
+
+sliders
+.to(objValue, 2, {a:1, onUpdate: updateGradient});
+
+
+function updateGradient(){
+    var per = objValue.a*100;
+    var pers = per + "%";
+    oneS.css("background-image", "linear-gradient(90deg, #e91e63 0%, #e91e63 " + pers + ", #03a8f400 " + pers + ",  #ff562200 100%);");
+    console.log(per);
+}
+
+
 
 
 var controller = new ScrollMagic.Controller();
@@ -248,6 +269,37 @@ new ScrollMagic.Scene({
   })
   .on("leave", function (event) {
     projectCards.reverse();
+  })
+  .addTo(controller);
+
+
+
+
+  var Projects = new TimelineMax()
+.to("#slideContainer", 1,   {x: "-75%"})	// move in to first panel
+.to("#slideContainer", 0.5, {z: 0}) // move back to origin in 3D space
+.to("#slideContainer", 0.5, {z: -150, delay: 1})	// move back in 3D space
+
+
+new ScrollMagic.Scene({
+  triggerElement: "#pinContainer",
+  triggerHook: "onLeave",
+  duration: "100%",
+  offset: height*3
+})
+.setPin("#pinContainer")
+  .setTween(Projects)
+  .addIndicators({
+    colorTrigger: "black",
+    colorStart: "black",
+    colorEnd: "black",
+    indent: 40
+  })
+  .on("enter", function (event) {
+   sliders.play();
+  })
+  .on("leave", function (event) {
+    //projectCards.reverse();
   })
   .addTo(controller);
 
