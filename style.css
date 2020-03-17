@@ -9,6 +9,9 @@
   src: url(fonts/maison-neue-light.woff);
 }
 
+body{
+  background-color: #ececec;
+}
 
 h2, h3, h4{
   font-family: maison;
@@ -151,25 +154,21 @@ box-shadow: 0px 0px 17px 8px rgba(0,0,0,0.31);
 }
 
 
-.mail{
-  color: 
-}
-
 #pinContainer {
-  background-color: #242424;
+  background-color: #ececec;
   width: 100%;
-  height: 100%;
+  height: 400%;
   overflow: hidden;
   -webkit-perspective: 1000;
           perspective: 1000;
 }
 #slideContainer {
-  width: 400%; /* to contain 4 panels, each with 100% of window width */
+  width: 100%; /* to contain 4 panels, each with 100% of window width */
   height: 100%;
 }
 .panel {
-  height: 100%;
-  width: 25%; /* relative to parent -> 25% of 400% = 100% of window width */
+  height: 25%;
+  width: 100%; /* relative to parent -> 25% of 400% = 100% of window width */
   float: left;
 }
 
